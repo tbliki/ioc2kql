@@ -7,7 +7,7 @@ This is designed to make large queries on tables quicker (e.g. a `has_any` over 
 
 ## 2. Where?
 
-Here! I also plan to make a Github Pages, and this beautiful spot in the readme is where I will put it.
+Here! [https://tbliki.github.io/IoC2KQL/](https://tbliki.github.io/IOC2KQL/)
 
 ## 3. Why?
 
