@@ -7,7 +7,7 @@ This is designed to make large queries on tables quicker (e.g. a `has_any` over 
 
 ## 2. Where?
 
-Here! [https://tbliki.github.io/IoC2KQL/](https://tbliki.github.io/IOC2KQL/)
+Here! [https://tbliki.github.io/ioc2kql/](https://tbliki.github.io/ioc2kql/)
 
 ## 3. Why?
 
