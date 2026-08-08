@@ -1,0 +1,31 @@
+.input {
+    width: 100%;
+    height: 80vh;
+    box-sizing: border-box;
+}
+
+.flex-container-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.width-75vw {
+    width: 75vw;
+}
+
+.height-75vh {
+    height: 75vh;
+}
+
+.flex-container-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.input-container {
+    width: 100%;
+}
