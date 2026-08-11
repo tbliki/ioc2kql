@@ -46,8 +46,7 @@ function formatCategorizedInput(categorizedInput, categories) {
 
 function refang(input) {
     return input
-        .replace(/hxxp[:]\/\//g, "http://")
-        .replace(/hxxps[:]\/\//g, "https://")
+        .replace(/\[\:\]/g, ":")
         .replace(/hxxp:\/\//g, "http://")
         .replace(/hxxps:\/\//g, "https://")
         .replace(/\[\.\]/g, ".")
