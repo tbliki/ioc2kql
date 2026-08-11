@@ -50,6 +50,8 @@ function refang(input) {
         .replace(/hxxps:\/\//g, "https://")
         .replace(/\[\.\]/g, ".")
         .replace(/\[@\]/g, "@")
+        .replace(/hxxp[:]\/\//g, "http://")
+        .replace(/hxxps[:]\/\//g, "https://")
 }
 
 const regexList = [
