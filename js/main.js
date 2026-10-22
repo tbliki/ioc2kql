@@ -36,9 +36,17 @@ function formatCategorizedInput(categorizedInput, categories) {
             let len = categorizedInput[i].length;
             output_str += "let Malicious" + categories[i] + "s = pack_array(\n";
             for (let j = 0; j < len - 1; j += 1) {
-                output_str += '    "' + categorizedInput[i][j] + '",\n';
+                let target = categorizedInput[i][j];
+                if (["IPv4", "IPv6", "Domain"].includes(categories[i]) && /:\d+$/.test(target)) {
+                    target = target.replace(/:\d+$/, "");
+                }
+                output_str += '    "' + target + '",\n';
             }
-            output_str += '    "' + categorizedInput[i][len - 1] + '"\n);\n';
+            let target = categorizedInput[i][len - 1];
+            if (["IPv4", "Domain"].includes(categories[i]) && /:\d+$/.test(target)) {
+                target = target.replace(/:\d+$/, "");
+            }
+            output_str += '    "' + target + '"\n);\n';
         }
     }
     return output_str;
@@ -54,12 +62,12 @@ function refang(input) {
 }
 
 const regexList = [
-    /^(?:25[0-5]|2[0-4]\d|1\d{2}|[1-9]\d|\d)(?:\.(?:25[0-5]|2[0-4]\d|1\d{2}|[1-9]\d|\d)){3}(?::(?:6553[0-5]|655[0-2]\d|65[0-4]\d{2}|6[0-4]\d{3}|[1-5]\d{4}|[1-9]\d{0,3}|0))?$/, // IPv4
-    /^(?:[0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}(?::(?:6553[0-5]|655[0-2]\d|65[0-4]\d{2}|6[0-4]\d{3}|[1-5]\d{4}|[1-9]\d{0,3}|0))?$/, // Dumb IPv6 (no :: simplification)
+    /^(?:25[0-5]|2[0-4]\d|1\d{2}|[1-9]\d|\d)(?:\.(?:25[0-5]|2[0-4]\d|1\d{2}|[1-9]\d|\d)){3}$/, // IPv4
+    /^(?:[0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}$/, // Dumb IPv6 (no :: simplification)
     /^[0-9a-fA-F]{32}$/, // MD5
     /^[0-9a-fA-F]{40}$/, // SHA1
     /^[0-9a-fA-F]{64}$/, // SHA256
-    /^(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,63}(?::(?:6553[0-5]|655[0-2]\d|65[0-4]\d{2}|6[0-4]\d{3}|[1-5]\d{4}|[1-9]\d{0,3}|0))?$/i, // Domain
+    /^(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,63}$/i, // Domain
     /^https?:\/\/(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,63}(?::\d{1,5})?(?:\/[^\s]*)?$/i, // URL
     /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,63}$/i, // Email
 ]
